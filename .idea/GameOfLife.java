@@ -1,7 +1,24 @@
 public class GameOfLife {
-
+    //Main
     public static void main(String[] args) {
+        Spielfeld spielBeginn = new Spielfeld(100, 100);
+        spielBeginn.zeichnen();
+    }
 
+
+    //Nachbarn zählen
+    public int zählNachbarn(int[][] spielFeld, int zeilen, int spalte, int aktZeile, int aktSpalte) {
+
+        int anzahlNachbarn = 0;
+
+        if () {
+
+        }
+        return anzahlNachbarn;
+    }
+
+    //nächste Generation erzeugen
+    public int[][] nextGen(int[][] currGen, int zeilen, int spalten) {
 
         //Tote Zelle, 3 Nachbarn, Wiedergeburt
         if (i = 0 && anzahlNachbarn = 3) {
@@ -19,5 +36,8 @@ public class GameOfLife {
         if (i = 1 && anzahlNachbarn > 3) {
             i == 0;
         }
+
+        return nextGen;
     }
+
 }
