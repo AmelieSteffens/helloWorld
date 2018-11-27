@@ -8,11 +8,21 @@ public class GameOfLife {
 
         Scanner eingabe = new Scanner(System.in);
 
-//        CurGen spielBeginn = new CurGen(100, 100);
-//        spielBeginn.zeichnen();
+        SpielfeldHelper spielfeldHelper = new SpielfeldHelper();
+
+        CurGen curGen = new CurGen(10, 10, spielfeldHelper);
 
         System.out.println("Wie viele Schritte möchten Sie sehen?");
         int x = eingabe.nextInt();
+
+        for (int i = 0; i < x; i++) {
+            System.out.println("Step " + i);
+            curGen.nextGeneration();
+        }
+
+
+//        CurGen spielBeginn = new CurGen(100, 100);
+//        spielBeginn.zeichnen();
 //        NextGen nextStep = new NextGen(spielBeginn);
 //
 //        for (int i = 0; i <= x-1; i++) {
