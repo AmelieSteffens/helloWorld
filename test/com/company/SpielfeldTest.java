@@ -3,45 +3,28 @@ package com.company;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-class CurGenTest {
+class SpielfeldTest {
 
-    CurGen sut;
-
+    Spielfeld sut;
     SpielfeldHelperStub spielfeldHelperStub;
 
     @BeforeEach
     void setUp() {
         spielfeldHelperStub = new SpielfeldHelperStub();
 
-        sut = new CurGen(10, 10, spielfeldHelperStub);
+        sut = new Spielfeld(10, 10, spielfeldHelperStub);
     }
-
-//    @Test
-//    void zaehlNachbarn() {
-//        //given:
-//        sut.spielFeld[1][1] = 1;
-//        sut.spielFeld[1][2] = 1;
-//        sut.spielFeld[1][3] = 1;
-//
-//        //when:
-//        int neighbourCount = sut.zaehlNachbarn(2, 2);
-//
-//
-//        //then:
-//        assertEquals(14, neighbourCount);
-//
-//    }
-
 
     @Test
     void verschiebeAusschnitt() {
         //given:
         int[][] returnedArray = new int[][]{
-                {0, 1, 1},
-                {0, 1, 1},
-                {0, 1, 1}
+                {0, 0, 0},
+                {0, 1, 0},
+                {0, 0, 0}
         };
 
         spielfeldHelperStub.returnedArray = returnedArray;
@@ -56,14 +39,16 @@ class CurGenTest {
         sut.spielFeld[7][7] = 1;
 
         //when:
-        boolean isMoved = sut.verschiebeAusschnitt(sut.spielFeld, 1, 1);
-
+        int [][] isMoved = sut.verschiebeAusschnitt(sut.spielFeld, 1, 1);
+        printArray(isMoved);
         //then:
-        assertFalse(!isMoved);
-        // bei erfolg = true
-
+        assertArrayEquals(returnedArray,isMoved);
     }
 
+    @Test
+    void nextGeneration (){
+
+    }
 
     public int[][] fillArray(int[][] array) {
         for (int i = 0; i < array.length; i++) {
@@ -72,6 +57,17 @@ class CurGenTest {
             }
         }
         return array;
+    }
+
+
+    public void printArray(int[][] array) {
+        for (int zeile = 0; zeile < array.length; zeile++) {
+            System.out.print("Zeile " + zeile + ": ");
+            for (int spalte = 0; spalte < array[zeile].length; spalte++)
+                System.out.print(array[zeile][spalte] + " ");
+            System.out.println();
+        }
+
     }
 
 
@@ -84,6 +80,5 @@ class CurGenTest {
             return returnedArray;
 
         }
-
     }
 }

@@ -42,7 +42,6 @@ class SpielfeldHelperTest {
 
     }
 
-
     public void printArray(int[][] array) {
         for (int zeile = 0; zeile < array.length; zeile++) {
             System.out.print("Zeile " + zeile + ": ");
