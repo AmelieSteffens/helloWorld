@@ -31,6 +31,8 @@ public class CurGen {
         for (int aktZeile = 0; aktZeile <= zeile; aktZeile++) {
             for (int aktSpalte = 0; aktSpalte <= spalte; aktSpalte++) {
 
+                int [][] ausschnitt = scanRobust(array,zeile,spalte);
+
 
 
                 //Zellen, die nicht am Rand liegen
@@ -219,66 +221,53 @@ public class CurGen {
     }
 
 
-    public int[][] schneideAus(int[][] spielFeld, int cellX, int cellY) {
-
-        int[][] ausschnitt = new int[3][3];
-
-        for (int i = cellX - 1; i < ausschnitt.length; i++) {
-            for (int j = cellY - 1; j < ausschnitt.length; j++) {
-                ausschnitt[i][j] = spielFeld[i][j];
-            }
-        }
-        return ausschnitt;
-    }
-
-    public int[][] schneideAusRobust(int[][] spielFeld, int startX, int startY) {
-
-        int[][] ausschnitt = new int[3][3];
-
-        for (int i = startX; i < ausschnitt.length; i++) {
-            for (int j = startY; j < ausschnitt.length; j++) {
-
-                //funktioniert mit if nicht
-                while (startX == 1){
-                    ausschnitt[i-1][j] = 0;
-                    startX++;
-                }
-                while (startY == 1) {
-                    ausschnitt[i][j - 1] = 0;
-                    startY++;
-                }
-
-                while (startX == ausschnitt.length-1){
-                    ausschnitt[startX+1][j] = 0;
-                    break;
-                }
-                while (startY == ausschnitt.length-1){
-                    ausschnitt[i][startY+1] = 0;
-                    break;
-                }
-                ausschnitt[i][j] = spielFeld[i][j];
-            }
-        }
-        return ausschnitt;
-    }
-
     public int [][] scanRobust (int [][] spielFeld, int pointX, int pointY){
 
         int [][]ausschnitt = new int [3][3];
 
-        if (pointX == 0 || pointY == 0 || pointX == spielFeld.length || pointY == spielFeld.length){
-            System.out.println("Kein valider Startpunkt.");
+        if (pointX == 0 || pointY == 0 || pointX == spielFeld.length-1 || pointY == spielFeld.length-1){
+            int i = spielFeld.length-1;
+            throw new IllegalArgumentException("Kein valider Startpunkt. Keiner der Punkte darf 0 bzw. gleich oder größer " + i +" sein.");
         }
         else {
-            for (int i = pointX; i < 3; i++) {
-                for (int j = pointY; j < 3; j++) {
-                    ausschnitt[i][j] = spielFeld[i][j];
+            for (int j = pointY; j < 3 + pointY; j++) {
+                for (int i = pointX; i < 3 + pointX; i++){
+                    ausschnitt[i-pointX][j-pointY] = spielFeld[i-1][j-1];
                 }
             }
         }
         return ausschnitt;
     }
 
+    public boolean verschiebeAusschnitt(int[][] spielFeld, int pointX, int pointY) {
+        boolean isMoved = false;
+        int[][] ausschnitt = scanRobust(spielFeld, pointX, pointY);
+        try {
+            for (int j = pointY; j < spielFeld.length-1; j++) {
+                for (int i = pointX; i < spielFeld.length-1; i++) {
+                    ausschnitt = scanRobust(spielFeld, i, j);
+                    //printArray(ausschnitt);
+                    //System.out.println("X: "+ i);
+                    //System.out.println("Y: "+ j);
+                    isMoved = true;
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            isMoved = false;
+        }
+        return isMoved;
+    }
+
+    public void printArray(int  [][] array){
+        for ( int zeile = 0; zeile < array.length; zeile++ )
+        {
+            System.out.print("Zeile " + zeile + ": ");
+            for ( int spalte=0; spalte < array[zeile].length; spalte++ )
+                System.out.print( array[zeile][spalte] + " ");
+            System.out.println();
+        }
+
+    }
 
     //nächste Generation erzeugen
    /* public int[][] nextGen(int[][] curGen, int zeilen, int spalten) {
