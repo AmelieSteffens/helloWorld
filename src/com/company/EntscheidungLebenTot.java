@@ -12,9 +12,9 @@ public class EntscheidungLebenTot {
     public int status(int[][] ausschnitt) {
         int neighbors = 0;
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (ausschnitt[j][i] == 1) {
+        for (int y = 0; y < 3; y++) {
+            for (int x = 0; x < 3; x++) {
+                if (ausschnitt[y][x] == 1) {
                     neighbors++;
                 }
             }

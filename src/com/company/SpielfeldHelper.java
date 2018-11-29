@@ -6,13 +6,13 @@ public class SpielfeldHelper {
 
         int[][] ausschnitt = new int[3][3];
 
-        if (pointX == 0 || pointY == 0 || pointX == spielFeld.length - 1 || pointY == spielFeld.length - 1) {
+        if (pointX == 0 || pointY == 0 || pointX == spielFeld.length - 1 || pointY == spielFeld[pointY].length - 1) {
             int i = spielFeld.length - 1;
             throw new IllegalArgumentException("Kein valider Startpunkt. Keiner der Punkte darf 0 bzw. gleich oder größer " + i + " sein.");
         } else {
-            for (int j = pointY; j < 3 + pointY; j++) {
-                for (int i = pointX; i < 3 + pointX; i++) {
-                    ausschnitt[i - pointX][j - pointY] = spielFeld[i - 1][j - 1];
+            for (int y = pointY; y < 3 + pointY; y++) {
+                for (int x = pointX; x < 3 + pointX; x++) {
+                    ausschnitt[y - pointY][x - pointX] = spielFeld[y - 1][x - 1];
                 }
             }
         }
