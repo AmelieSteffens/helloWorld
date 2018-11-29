@@ -2,14 +2,13 @@ package com.company;
 
 public class Spielfeld {
 
-    EntscheidungLebenTot entscheidungLebenTot;
-
     //Definition Spielfeld
     final int zeile;
     final int spalte;
     int spielFeld[][];
 
     SpielfeldHelper spielfeldHelper;
+    EntscheidungLebenTot entscheidungLebenTot;
 
     //Konstruktor
     Spielfeld(int zeile, int spalte, SpielfeldHelper spielfeldHelper) {
@@ -30,7 +29,6 @@ public class Spielfeld {
                 ausschnitt = spielfeldHelper.kopiereAusschnitt(spielFeld, i, j);
             }
         }
-
         return ausschnitt;
     }
 
@@ -53,11 +51,14 @@ public class Spielfeld {
     private int decideAliveOrNot() {
         return entscheidungLebenTot.status(getNextExtract());
     }
+//    private int [][] copyExtract () {
+//        return spielfeldHelper.kopiereAusschnitt(getNextExtract(), 1, 1);
+//    }
     private int[][] getNextExtract() {
-        return verschiebeAusschnitt (copyExtract(), 1, 1);
-    }
-    private int [][] copyExtract () {
-        return spielfeldHelper.kopiereAusschnitt(spielFeld, 1, 1);
+        return verschiebeAusschnitt (spielFeld, 1, 1);
     }
 
+    public int[][] bewegeCursor(int[][] spielFeld) {
+
+    }
 }
