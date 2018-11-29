@@ -10,7 +10,7 @@ public class GameOfLife {
 
         SpielfeldHelper spielfeldHelper = new SpielfeldHelper();
 
-        Spielfeld beginn = new Spielfeld(11, 11, spielfeldHelper);
+        Spielfeld beginn = new Spielfeld(10, 10, spielfeldHelper);
 
         beginn.spielFeld = erzeugeStart();
 
@@ -36,8 +36,7 @@ public class GameOfLife {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 1, 0, 0, 0, 1, 1, 1, 0},
                 {0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
     }
 }

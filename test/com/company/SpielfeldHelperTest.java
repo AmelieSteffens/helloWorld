@@ -17,7 +17,7 @@ class SpielfeldHelperTest {
     }
 
     @Test
-    void robusterScan() {
+    void kopiereAusschnitt() {
         //given:
         spielFeld = fillArray1Rand0(spielFeld);
 

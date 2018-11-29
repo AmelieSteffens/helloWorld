@@ -22,8 +22,8 @@ class SpielfeldTest {
     void verschiebeAusschnitt() {
         //given:
         int[][] returnedArray = new int[][]{
-                {0, 0, 0},
-                {0, 1, 0},
+                {1, 1, 0},
+                {1, 1, 0},
                 {0, 0, 0}
         };
 
@@ -37,6 +37,9 @@ class SpielfeldTest {
         sut.spielFeld[4][5] = 1;
         sut.spielFeld[5][4] = 1;
         sut.spielFeld[7][7] = 1;
+        sut.spielFeld[6][7] = 1;
+        sut.spielFeld[6][6] = 1;
+        sut.spielFeld[7][6] = 1;
 
         //when:
         int [][] isMoved = sut.verschiebeAusschnitt(sut.spielFeld, 1, 1);
@@ -47,7 +50,43 @@ class SpielfeldTest {
 
     @Test
     void nextGeneration (){
+        //given:
+        sut.spielFeld = fillArray (sut.spielFeld);
 
+        sut.spielFeld[1][4] = 1;
+        sut.spielFeld[2][3] = 1;
+        sut.spielFeld[2][5] = 1;
+        sut.spielFeld[3][4] = 1;
+
+        sut.spielFeld[4][6] = 1;
+        sut.spielFeld[4][7] = 1;
+        sut.spielFeld[5][6] = 1;
+        sut.spielFeld[5][7] = 1;
+
+        sut.spielFeld[7][1] = 1;
+        sut.spielFeld[7][2] = 1;
+        sut.spielFeld[8][1] = 1;
+        sut.spielFeld[8][2] = 1;
+
+        //and:
+        int [][] expectedStep = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                {0, 0, 0, 1, 0, 1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+        };
+
+        //when:
+        int [][] test = sut.nextGeneration();
+
+        //then:
+        assertArrayEquals(expectedStep,test);
     }
 
     public int[][] fillArray(int[][] array) {
@@ -59,7 +98,6 @@ class SpielfeldTest {
         return array;
     }
 
-
     public void printArray(int[][] array) {
         for (int zeile = 0; zeile < array.length; zeile++) {
             System.out.print("Zeile " + zeile + ": ");
@@ -69,7 +107,6 @@ class SpielfeldTest {
         }
 
     }
-
 
     class SpielfeldHelperStub extends SpielfeldHelper {
 

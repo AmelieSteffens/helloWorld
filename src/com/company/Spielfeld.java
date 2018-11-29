@@ -20,34 +20,44 @@ public class Spielfeld {
         this.entscheidungLebenTot = new EntscheidungLebenTot();
     }
 
-    public int [][] verschiebeAusschnitt(int [][] spielFeld, int pointX, int pointY) {
+    // 3x3 Ausschnitt verschieben
+    public int[][] verschiebeAusschnitt(int[][] spielFeld, int pointX, int pointY) {
 
-        int[][] ausschnitt = spielfeldHelper.kopiereAusschnitt(spielFeld, pointX, pointY);
+        int[][] ausschnitt = new int[3][3];
 
-            for (int j = pointY; j < spielFeld.length - 1; j++) {
-                for (int i = pointX; i < spielFeld.length - 1; i++) {
-                    ausschnitt = spielfeldHelper.kopiereAusschnitt(spielFeld, i, j);
-                }
+        for (int j = pointY; j < spielFeld.length - 1; j++) {
+            for (int i = pointX; i < spielFeld.length - 1; i++) {
+                ausschnitt = spielfeldHelper.kopiereAusschnitt(spielFeld, i, j);
             }
+        }
 
         return ausschnitt;
     }
 
-    public void drawNextGen (){
-        //zeichne
+    //zeichne Generation
+    public void drawNextGen() {
         spielfeldHelper.printArray(nextGeneration());
     }
 
+    //berechne nächste Generation
     public int[][] nextGeneration() {
 
         int[][] nextGen = spielFeld;
-        for (int i = 0; i < nextGen.length-1; i++) {
-            for (int j = 0; j < nextGen.length-1; j++) {
-                nextGen[i][j] = entscheidungLebenTot.status(verschiebeAusschnitt(spielfeldHelper.kopiereAusschnitt(spielFeld, 1, 1), 1, 1));
+        for (int i = 0; i < nextGen.length - 1; i++) {
+            for (int j = 0; j < nextGen.length - 1; j++) {
+                nextGen[i][j] = decideAliveOrNot();
             }
         }
         return nextGen;
     }
-
+    private int decideAliveOrNot() {
+        return entscheidungLebenTot.status(getNextExtract());
+    }
+    private int[][] getNextExtract() {
+        return verschiebeAusschnitt (copyExtract(), 1, 1);
+    }
+    private int [][] copyExtract () {
+        return spielfeldHelper.kopiereAusschnitt(spielFeld, 1, 1);
+    }
 
 }
