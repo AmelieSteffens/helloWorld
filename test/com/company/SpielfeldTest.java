@@ -49,43 +49,6 @@ class SpielfeldTest {
         assertArrayEquals(returnedArray,isMoved);
     }
 
-    @Test
-    void movingCursor() {
-        //given
-        sut.spielFeld = fillArray(sut.spielFeld);
-        sut.spielFeld[1][3] = 1;
-        sut.spielFeld[1][4] = 1;
-        sut.spielFeld[2][3] = 1;
-        sut.spielFeld[2][4] = 1;
-        sut.spielFeld[3][6] = 1;
-        sut.spielFeld[3][7] = 1;
-        sut.spielFeld[4][6] = 1;
-        sut.spielFeld[4][7] = 1;
-        sut.spielFeld[7][1] = 1;
-        sut.spielFeld[7][2] = 1;
-        sut.spielFeld[8][1] = 1;
-        sut.spielFeld[8][2] = 1;
-
-        //Konzept
-        //next, copy, zustand, next, copy zustand = eine methode
-        //Schleifen auflösen; Objekt, das den Startpunkt hält; Methode, die Cursor verschiebt (hochzählen)
-        //auf Objekt Methode aufrufen, die Zustand berechnet und weitergibt
-
-        //and
-        int[][] expected = new int[][]{
-                {0, 0, 0},
-                {0, 0, 1},
-                {0, 0, 1}
-        };
-
-        //when
-        int [][] test = sut.bewegeCursor(sut.spielFeld);
-
-        //then
-        assertArrayEquals(expected, test);
-
-    }
-
 
     public int[][] fillArray(int[][] array) {
         for (int i = 0; i < array.length; i++) {

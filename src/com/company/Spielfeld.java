@@ -19,17 +19,18 @@ public class Spielfeld {
         this.entscheidungLebenTot = new EntscheidungLebenTot();
     }
 
-    // 3x3 Ausschnitt verschieben
+    // 3x3 Ausschnitt verschieben & Anwendung Regeln!
     public int[][] verschiebeAusschnitt(int[][] spielFeld, int pointX, int pointY) {
 
-        int[][] ausschnitt = new int[3][3];
+        int[][] ausschnitt;
 
         for (int j = pointY; j < spielFeld.length - 1; j++) {
             for (int i = pointX; i < spielFeld.length - 1; i++) {
                 ausschnitt = spielfeldHelper.kopiereAusschnitt(spielFeld, i, j);
+                spielFeld[i][j] = entscheidungLebenTot.status(ausschnitt);
             }
         }
-        return ausschnitt;
+        return spielFeld;
     }
 
     //zeichne Generation
@@ -40,25 +41,17 @@ public class Spielfeld {
     //berechne nächste Generation
     public int[][] nextGeneration() {
 
-        int[][] nextGen = spielFeld;
-        for (int i = 0; i < nextGen.length - 1; i++) {
-            for (int j = 0; j < nextGen.length - 1; j++) {
-                nextGen[i][j] = decideAliveOrNot();
+        for (int y = 1; y < spielFeld.length - 1; y++) {
+            for (int x = 1; x < spielFeld[y].length - 1; x++) {
+                spielFeld[x][y] = decideAliveOrNot(x,y) [x][y];
             }
         }
-        return nextGen;
-    }
-    private int decideAliveOrNot() {
-        return entscheidungLebenTot.status(getNextExtract());
-    }
-//    private int [][] copyExtract () {
-//        return spielfeldHelper.kopiereAusschnitt(getNextExtract(), 1, 1);
-//    }
-    private int[][] getNextExtract() {
-        return verschiebeAusschnitt (spielFeld, 1, 1);
+        return spielFeld;
     }
 
-    public int[][] bewegeCursor(int[][] spielFeld) {
 
+    private int [][] decideAliveOrNot(int i, int j) {
+        return verschiebeAusschnitt(spielFeld, i, j);
     }
+
 }

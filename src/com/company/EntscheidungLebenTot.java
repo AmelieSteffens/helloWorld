@@ -14,7 +14,7 @@ public class EntscheidungLebenTot {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (ausschnitt[i][j] == 1) {
+                if (ausschnitt[j][i] == 1) {
                     neighbors++;
                 }
             }
