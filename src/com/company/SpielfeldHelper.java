@@ -12,7 +12,7 @@ public class SpielfeldHelper {
         } else {
             for (int y = pointY; y < 3 + pointY; y++) {
                 for (int x = pointX; x < 3 + pointX; x++) {
-                    ausschnitt[y - pointY][x - pointX] = spielFeld[y - 1][x - 1];
+                    ausschnitt[x - pointX][y - pointY] = spielFeld[x - 1][y - 1];
                 }
             }
         }
@@ -21,10 +21,15 @@ public class SpielfeldHelper {
 
 
     public void printArray(int[][] array) {
-        for (int zeile = 0; zeile < array.length; zeile++) {
-            System.out.print("Zeile " + zeile + ": ");
-            for (int spalte = 0; spalte < array[zeile].length; spalte++)
-                System.out.print(array[zeile][spalte] + " ");
+        for (int x = 0; x < array.length; x++) {
+            System.out.print("Zeile " + x + ": ");
+            for (int y = 0; y < array[x].length; y++)
+
+                if (array[x][y] == 0){
+                    System.out.print("_ ");
+                } else {
+                    System.out.print("X ");
+                }
             System.out.println();
         }
 

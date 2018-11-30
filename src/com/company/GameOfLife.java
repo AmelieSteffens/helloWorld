@@ -17,8 +17,13 @@ public class GameOfLife {
         System.out.println("Wie viele Schritte möchten Sie sehen?");
         int x = eingabe.nextInt();
 
+        System.out.println("Beginn");
+        System.out.println();
+        spielfeldHelper.printArray(beginn.spielFeld);
+        System.out.println();
+
         for (int i = 0; i < x; i++) {
-            System.out.println("Step " + (i + 1));
+            System.out.println("Step " + (i+1) );
             System.out.println();
             beginn.drawNextGen();
             System.out.println();
@@ -28,14 +33,14 @@ public class GameOfLife {
     private static int[][] erzeugeStart() {
         return new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 1, 1, 0, 0, 0, 0, 0},
-                {0, 0, 0, 1, 1, 0, 0, 0, 0, 0},
+                {0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+                {0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 1, 1, 0, 0},
                 {0, 0, 0, 0, 0, 0, 1, 1, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 1, 1, 0, 0, 0, 1, 1, 1, 0},
-                {0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 1, 0, 0, 0, 1, 1, 0, 0},
+                {0, 0, 1, 0, 0, 0, 1, 1, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
     }

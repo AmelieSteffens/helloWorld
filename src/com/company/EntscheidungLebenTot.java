@@ -14,7 +14,7 @@ public class EntscheidungLebenTot {
 
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
-                if (ausschnitt[y][x] == 1) {
+                if (ausschnitt[x][y] == 1) {
                     neighbors++;
                 }
             }
@@ -24,7 +24,7 @@ public class EntscheidungLebenTot {
             neighbors = neighbors - 1;
         }
 
-        if ((neighbors == 2) && ausschnitt[1][1] == 1 || (neighbors == 3)) {
+        if (((neighbors == 2) && ausschnitt[1][1] == 1) || (neighbors == 3)) {
             return 1;
         } else {
             return 0;

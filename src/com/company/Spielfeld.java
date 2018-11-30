@@ -19,16 +19,11 @@ public class Spielfeld {
         this.entscheidungLebenTot = new EntscheidungLebenTot();
     }
 
-    // 3x3 Ausschnitt verschieben //cursor --> weniger forschleife
+     //3x3 Ausschnitt verschieben
     public int[][] verschiebeAusschnitt(int[][] spielFeld, int pointX, int pointY) {
 
-        int[][] ausschnitt = spielFeld;
+        int[][] ausschnitt = spielfeldHelper.kopiereAusschnitt(spielFeld, pointX, pointY);
 
-        for (int y = pointY; y < spielFeld.length - 1; y++) {
-            for (int x = pointX; x < spielFeld[x].length - 1; x++) {
-                ausschnitt = spielfeldHelper.kopiereAusschnitt(spielFeld, y, x);
-            }
-        }
         return ausschnitt;
     }
 
@@ -40,21 +35,16 @@ public class Spielfeld {
     //berechne nächste Generation
     public int[][] nextGeneration() {
 
-        int [][]ausschnitt = spielFeld;
+        int [][]ausschnitt;
+        int [][]nextGen = spielFeld;
 
         for (int y = 1; y < spielFeld.length - 1; y++) {
             for (int x = 1; x < spielFeld[y].length - 1; x++) {
-                ausschnitt = verschiebeAusschnitt(spielFeld,y,x);
-                spielFeld[y][x] = entscheidungLebenTot.status(ausschnitt);
-
+                ausschnitt = spielfeldHelper.kopiereAusschnitt(spielFeld,x,y); //Verschiebung Ausschnitt erfolgt durch for-Schleife
+                nextGen[x][y] = entscheidungLebenTot.status(ausschnitt);
             }
         }
-        return spielFeld;
-    }
-
-
-    private int [][] decideAliveOrNot(int i, int j) {
-        return verschiebeAusschnitt(spielFeld, i, j);
+        return nextGen;
     }
 
 }
