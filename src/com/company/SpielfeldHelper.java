@@ -6,7 +6,7 @@ public class SpielfeldHelper {
 
         int[][] ausschnitt = new int[3][3];
 
-        if (pointX == 0 || pointY == 0 || pointX == spielFeld.length - 1 || pointY == spielFeld[pointY].length - 1) {
+        if (pointX == 0 || pointY == 0 || pointX == spielFeld[pointY].length - 1 || pointY == spielFeld.length - 1) {
             int i = spielFeld.length - 1;
             throw new IllegalArgumentException("Kein valider Startpunkt. Keiner der Punkte darf 0 bzw. gleich oder größer " + i + " sein.");
         } else {

@@ -22,18 +22,17 @@ public class Spielfeld {
      //3x3 Ausschnitt verschieben
     public int[][] verschiebeAusschnitt(int[][] spielFeld, int pointX, int pointY) {
 
-        int[][] ausschnitt = spielfeldHelper.kopiereAusschnitt(spielFeld, pointX, pointY);
-
-        return ausschnitt;
+        return spielfeldHelper.kopiereAusschnitt(spielFeld, pointX, pointY);
     }
 
     //zeichne Generation
     public void drawNextGen() {
+
         spielfeldHelper.printArray(nextGeneration());
     }
 
     //berechne nächste Generation
-    public int[][] nextGeneration() {
+    public int[][] nextGeneration() { // nach erstem durchlauf, ausführung nicht mehr auf beginn sondern ergebnis erster durchlauf
 
         int [][]ausschnitt;
         int [][]nextGen = new int [zeile][spalte];

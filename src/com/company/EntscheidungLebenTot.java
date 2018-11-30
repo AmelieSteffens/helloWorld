@@ -2,13 +2,6 @@ package com.company;
 
 public class EntscheidungLebenTot {
 
-
-    /**
-     * Coole Doku
-     *
-     * @param ausschnitt
-     * @return int
-     */
     public int status(int[][] ausschnitt) {
         int neighbors = 0;
 
@@ -24,7 +17,7 @@ public class EntscheidungLebenTot {
             neighbors = neighbors - 1;
         }
 
-        if (((neighbors == 2) && ausschnitt[1][1] == 1) || (neighbors == 3)) {
+        if ((neighbors == 3)||((neighbors == 2) && ausschnitt[1][1] == 1)) {
             return 1;
         } else {
             return 0;
