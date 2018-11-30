@@ -29,6 +29,7 @@ public class Spielfeld {
     public void drawNextGen() {
 
         spielfeldHelper.printArray(nextGeneration());
+        spielFeld = nextGeneration();
     }
 
     //berechne nächste Generation
