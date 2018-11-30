@@ -36,11 +36,11 @@ public class Spielfeld {
     public int[][] nextGeneration() {
 
         int [][]ausschnitt;
-        int [][]nextGen = spielFeld;
+        int [][]nextGen = new int [zeile][spalte];
 
         for (int y = 1; y < spielFeld.length - 1; y++) {
             for (int x = 1; x < spielFeld[y].length - 1; x++) {
-                ausschnitt = spielfeldHelper.kopiereAusschnitt(spielFeld,x,y); //Verschiebung Ausschnitt erfolgt durch for-Schleife
+                ausschnitt = spielfeldHelper.kopiereAusschnitt(spielFeld,x,y);
                 nextGen[x][y] = entscheidungLebenTot.status(ausschnitt);
             }
         }
